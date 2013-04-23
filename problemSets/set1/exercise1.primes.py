@@ -1,7 +1,7 @@
 """
 Compute primes up to 1000
 
-(C) @ Christian Kohlstedde
+(C) Christian Kohlstedde
 
 how to run:
 python exercise1.prime.py

@@ -2,7 +2,7 @@
 exercise 2
 the fibonacci numbers
 
-(C) @ Christian Kohlstedde
+(C) Christian Kohlstedde
 
 how to run:
 python exercise2.fibonacci.py
