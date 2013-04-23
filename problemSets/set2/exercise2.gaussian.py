@@ -17,7 +17,7 @@ def integrate_gaussian(mu, sigma, xmin, xmax, n_steps):
     h = (xmax - xmin) / n_steps
     s = gaussian(xmin, mu, sigma) + gaussian(xmax, mu, sigma)
     for i in xrange(1, n_steps):
-	 s += 2 * gaussian(xmin + i * h, mu, sigma)
+        s += 2 * gaussian(xmin + i * h, mu, sigma)
     return s * h / 2
 
 mu = 3.

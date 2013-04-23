@@ -36,4 +36,3 @@ for i in range(throws):
 # printing out beautiful statistics
 for sum in d:
     print sum, ": ", d[sum] / float(throws) * 100, "%"
-

@@ -11,7 +11,7 @@ python exercise1.prime.py
 # just knowing her good enough
 print 2
 
-# running for loop over the range from 3 to 1000 excluding the even numbers by submitting 2 as the step 
+# running for loop over the range from 3 to 1000 excluding the even numbers by submitting 2 as the step
 for prime in range(3,1000,2):
 
     # helper var
@@ -20,9 +20,9 @@ for prime in range(3,1000,2):
     # running the test, starting a 3 to the testing number,
     # also excluding the evens
     for test in range(3, prime, 2):
-	# test
+        # test
         if (prime % test) == 0:
-	    isprime = False
-    
+        isprime = False
+
     if isprime:
-	print prime
+        print prime
