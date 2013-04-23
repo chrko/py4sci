@@ -2,6 +2,9 @@
 Compute primes up to 1000
 
 (C) @ Christian Kohlstedde
+
+how to run:
+python exercise1.prime.py
 """
 
 # printing the 2 all times
