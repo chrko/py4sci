@@ -22,7 +22,8 @@ for prime in range(3,1000,2):
     for test in range(3, prime, 2):
         # test
         if (prime % test) == 0:
-        isprime = False
+	    isprime = False
+	    break
 
     if isprime:
         print prime
