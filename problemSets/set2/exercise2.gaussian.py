@@ -2,6 +2,8 @@
 normalized gaussian distribution for position x and parameters mu and sigma
 
 (c) Christian Kohlstedde
+
+run by python exercise2.gaussian.py
 """
 
 def gaussian(x, mu, sigma):
