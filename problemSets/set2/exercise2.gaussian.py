@@ -47,4 +47,5 @@ print "n_steps at 3 ", integrate_gaussian(mu, sigma, xmin, xmax, 3)
 
 # The mu is 3, so setting the xmin also to 3
 # gives only the a small area of the wanted graph
-print "xmin = 3.", integrate_gaussian(mu, sigma, 3., xmax, 3)
+print "xmin = 3.", integrate_gaussian(mu, sigma, 3., xmax, n_steps)
+print "xmin = 3., n_steps = 3", integrate_gaussian(mu, sigma, 3., xmax, 3)
