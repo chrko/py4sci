@@ -26,5 +26,5 @@ for num in fib:
         # getting the square and checking with fibonacci number
         sqrtTest = sqrt * sqrt;
         if sqrtTest == num:
-            print sqrt
+            print num
             break
