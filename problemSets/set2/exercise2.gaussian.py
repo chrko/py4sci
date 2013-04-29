@@ -8,8 +8,8 @@ run by python exercise2.gaussian.py
 
 def gaussian(x, mu, sigma):
     import math
-    
-    temp1 = math.exp(-math.pow(x-mu,2)/(2 * sigma**2))
+
+    temp1 = math.exp(-math.pow(x-mu, 2)/(2 * sigma**2))
     temp2 = sigma * math.sqrt(2 * math.pi)
     return temp1 / temp2
 
@@ -36,7 +36,8 @@ n_steps = 1000
 print "integrate_gaussian(mu = 3., sigma =1., xmin = -10., xmax = +10., n_steps) ", integrate_gaussian(mu, sigma, xmin, xmax, n_steps)
 
 # Decreasing the n_steps causes much less accurancy
-# => the used numerous integral depends on small steps in relation to the integrated function
+# => the used numerous integral depends on small steps
+# in relation to the integrated function
 # so the resolution is great enough to recognize small changes in the graph
 
 print "n_steps at 300 ", integrate_gaussian(mu, sigma, xmin, xmax, 300)

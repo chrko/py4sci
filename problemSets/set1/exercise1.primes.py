@@ -19,8 +19,9 @@ print 2
 count += 1
 sum   += 2
 
-# running for loop over the range from 3 to 1000 excluding the even numbers by submitting 2 as the step
-for prime in range(3,1000,2):
+# running for loop over the range from 3 to 1000
+# excluding the even numbers by submitting 2 as the step
+for prime in range(3, 1000, 2):
 
     # helper var
     isprime = True

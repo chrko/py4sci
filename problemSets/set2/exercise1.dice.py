@@ -9,13 +9,12 @@ python exercise1.dice.py
 
 # Defining a dice function
 # returns the sum of the thrown dices
-def dice(diceCount = 1):
+def dice(diceCount=1):
     import random
-
     sum = 0
 
     for i in range(diceCount):
-        sum += random.randint(1,6)
+        sum += random.randint(1, 6)
     return sum
 
 # parameters
