@@ -23,8 +23,8 @@ print fib
 for num in fib:
     # added the 0.5 to ceil
     for sqrt in range(0, int(num / 2.0 + 0.5 ) + 1):
-	# getting the square and checking with fibonacci number
-	sqrtTest = sqrt * sqrt;
-	if sqrtTest == num:
-	    print sqrt
-	    break
+        # getting the square and checking with fibonacci number
+        sqrtTest = sqrt * sqrt;
+        if sqrtTest == num:
+            print sqrt
+            break

@@ -24,14 +24,13 @@ for prime in range(3,1000,2):
 
     # helper var
     isprime = True
-
     # running the test, starting a 3 to the testing number,
     # also excluding the evens
     for test in range(3, prime, 2):
         # test
         if (prime % test) == 0:
-	    isprime = False
-	    break
+            isprime = False
+            break
 
     if isprime:
         print prime
