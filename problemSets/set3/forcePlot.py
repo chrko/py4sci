@@ -1,5 +1,7 @@
 """
+monte carlo error propagation
 
+Christian Kohlstedde
 """
 import numpy as np
 import matplotlib
