@@ -6,6 +6,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
+
 def force(m_1, m_2, r):
     return G * m_1 * m_2 / r**2
 
@@ -23,9 +24,10 @@ def force_sigma(m_1, s_m_1, m_2, s_m_2, r, s_r):
 
 def gaussian(mean, sigma, xmin=0., xmax=10., steps=100):
     x = np.linspace(xmin, xmax, steps)
-    y = (1. / (sigma * np.sqrt(2.* np.pi))
-         * np.exp(-(x - mean)**2 /    (2. * sigma**2)))
+    y = (1. / (sigma * np.sqrt(2. * np.pi))
+         * np.exp(-(x - mean)**2 / (2. * sigma**2)))
     return x, y
+
 
 def monte_carlo_sim(filename="fig.png"):
     m_1s = np.random.normal(m_1, s_m_1, n)
