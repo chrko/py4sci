@@ -51,6 +51,8 @@ def mc_plot(filename="fig.png"):
     plt.hist(forces, bins=50, normed=True)
     plt.plot(x, y, linewidth=3, color='red')
 
+    plt.xlabel("Force")
+    plt.ylabel("Frequency")
     # saving the fig under the given filename
     plt.savefig(filename)
 
