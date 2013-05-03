@@ -7,10 +7,12 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 
+# function to compute the force between two masses
 def force(m_1, m_2, r):
     return G * m_1 * m_2 / r**2
 
 
+# compute the sigma of the force by given values
 def force_sigma(m_1, s_m_1, m_2, s_m_2, r, s_r):
     return np.sqrt(
         (G/r**2)**2
@@ -22,6 +24,7 @@ def force_sigma(m_1, s_m_1, m_2, s_m_2, r, s_r):
     )
 
 
+# returning x/y-values for a gaussian distribution
 def gaussian(mean, sigma, xmin=0., xmax=10., steps=100):
     x = np.linspace(xmin, xmax, steps)
     y = (1. / (sigma * np.sqrt(2. * np.pi))
@@ -29,7 +32,8 @@ def gaussian(mean, sigma, xmin=0., xmax=10., steps=100):
     return x, y
 
 
-def monte_carlo_sim(filename="fig.png"):
+# monte carlo plotting
+def mc_plot(filename="fig.png"):
     m_1s = np.random.normal(m_1, s_m_1, n)
     m_2s = np.random.normal(m_2, s_m_2, n)
     rs = np.random.normal(r, s_r, n)
@@ -40,11 +44,14 @@ def monte_carlo_sim(filename="fig.png"):
 
     x, y = gaussian(force_calc, sigma, np.min(forces), np.max(forces))
 
+    # clearing plt to remove old things
     plt.cla()
 
+    # plotting the hist and the line
     plt.hist(forces, bins=50, normed=True)
     plt.plot(x, y, linewidth=3, color='red')
 
+    # saving the fig under the given filename
     plt.savefig(filename)
 
 # var definition
@@ -56,7 +63,7 @@ G = 6.67384*10**(-11)
 n = 10**6
 
 s_m_1, s_m_2, s_r = 0.05*10**4, 0.1*10**4, 0.01
-monte_carlo_sim('fig1.png')
+mc_plot('fig1.png')
 
 s_m_1, s_m_2, s_r = 2*10**4, 10*10**4, 1
-monte_carlo_sim('fig2.png')
+mc_plot('fig2.png')
