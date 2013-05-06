@@ -45,7 +45,7 @@ def mc_plot(filename="fig.png"):
     sigma = force_sigma(m_1, s_m_1, m_2, s_m_2, r, s_r)
 
     x, y = gaussian(force_calc, sigma, np.min(forces), np.max(forces))
-
+    print forces
     # clearing plt to remove old things
     plt.cla()
 
