@@ -8,23 +8,30 @@ import numpy as np
 import matplotlib
 #matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+plt.ion()
 
 
 filename = 'data/kplr002571238-2009259160929_llc.txt'
-f = open(filename, 'r')
 
-line_count = 0
-for x in open(filename):
-    line_count += 1
+data = np.loadtxt(filename)
+dataOrig = data
 
+width = 1
 
-data = np.zeros([line_count, 2])
+for position in range(len(data)):
+    startday = data[position,0]
 
-i = 0
+    count = 0
+    median = 0
+    for day in data[position:,0]:
+        if (day - startday) < width:
+	    median += data[position+count,1]
+	    count += 1
+        else:
+	    break
+    median /= count
+    data[position, 1] = median
 
-for line in f:
-    line = line.strip()
-    columns = line.split()
-    data[i, 0] = float(columns[0])
-    data[i, 1] = float(columns[1])
-    i += 1
+plt.cla()
+plt.plot(dataOrig[:,0], dataOrig[:,1])
+plt.plot(data[:,0], data[:,1])
