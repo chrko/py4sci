@@ -10,27 +10,39 @@ import matplotlib
 import matplotlib.pyplot as plt
 plt.ion()
 
+from copy import deepcopy
 
 filename = 'data/kplr002571238-2009259160929_llc.txt'
 
 data = np.loadtxt(filename)
-dataOrig = data
+dataOrig = deepcopy(data)
 
 width = 1
 
-for position in range(len(data)):
-    startday = data[position,0]
 
-    count = 0
-    median = 0
-    for day in data[position:,0]:
-        if (day - startday) < width:
-	    median += data[position+count,1]
-	    count += 1
-        else:
-	    break
-    median /= count
-    data[position, 1] = median
+def median_filter(data, width):
+    for position in range(len(data)):
+        cur_x = data[position, 0]
+        new_y = 0
+        count = 0
+        for x in data[position:, 0]:
+            if (x - cur_x) < (width / 2):
+                new_y += data[position + count, 1]
+                count += 1
+            else:
+                break
+        new_y /= count
+        count = 1
+        for x in data[position::-1, 0]:
+            if x == cur_x:
+                continue
+            if (cur_x - x) < (width / 2):
+                new_y += data[position - count, 1]
+                count += 1
+            else:
+                break
+        new_y /= count
+        data[position, 1] = new_y
 
 plt.cla()
 plt.plot(dataOrig[:,0], dataOrig[:,1])
