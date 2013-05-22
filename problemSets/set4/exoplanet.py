@@ -9,15 +9,12 @@ import matplotlib
 #matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 plt.ion()
-
 from copy import deepcopy
 
-filename = 'data/kplr002571238-2009259160929_llc.txt'
 
-data = np.loadtxt(filename)
-dataOrig = deepcopy(data)
-
+sense = 10
 width = 1
+filenames = ['kplr002571238-2009259160929']
 
 
 def median_filter(data, width):
@@ -26,34 +23,44 @@ def median_filter(data, width):
             data[abs(data[:, 0] - data[position, 0]) < 1, 1]
         )
 
+for filename in filenames:
+    file = 'data/' + filename + '_llc.txt'
 
-median_filter(data, 1)
+    data = np.loadtxt(file)
+    dataOrig = deepcopy(data)
 
-plt.cla()
-plt.scatter(dataOrig[:, 0], dataOrig[:, 1], s=1)
-plt.plot(data[:, 0], data[:, 1], 'r', lw=2)
+    median_filter(data, 1)
 
+    plt.cla()
+    plt.scatter(dataOrig[:, 0], dataOrig[:, 1], s=1)
+    plt.plot(data[:, 0], data[:, 1], 'r', lw=2)
 
-residualDataY = abs(dataOrig[:, 1] - data[:, 1]) 
-plt.cla()
-plt.plot(data[:, 0], residualDataY)
+    plt.savefig(filename + '-plot1.png')
 
+    residualDataY = abs(dataOrig[:, 1] - data[:, 1])
+    plt.cla()
+    plt.plot(data[:, 0], residualDataY)
 
-sense = 10
-dt = np.diff(data[residualDataY > np.mean(residualDataY) * sense, 0])
-period = np.mean(dt[(dt > 1) & (dt < 15)])
+    plt.savefig(filename + '-plot2-residual.png')
 
+    dt = np.diff(data[residualDataY > np.mean(residualDataY) * sense, 0])
+    period = np.mean(dt[(dt > 1) & (dt < 15)])
 
-plt.cla()
-phaseX = ((data[:, 0]) % period) / period
-phaseX = ((data[:, 0] - np.mean(phaseX[residualDataY > np.mean(residualDataY) * sense] - 0.5) * period) % period) / period
+    plt.cla()
+    phaseX = ((data[:, 0]) % period) / period
+    phaseX = ((data[:, 0]
+              - np.mean(phaseX[residualDataY
+                               > np.mean(residualDataY) * sense] - 0.5)
+              * period) % period) / period
 
+    plt.plot(phaseX, residualDataY)
 
+    plt.savefig(filename + '-plot3-residual-phase.png')
 
-plt.plot(phaseX, residualDataY)
+    plt.cla()
 
-plt.cla()
+    extract = (phaseX > 0.45) & (phaseX < 0.55)
+    plt.plot(phaseX[extract], residualDataY[extract])
+    plt.axis([0.45, 0.55, plt.axis()[2], plt.axis()[3]])
 
-extract = (phaseX > 0.45) & (phaseX < 0.55)
-plt.plot(phaseX[extract], residualDataY[extract])
-plt.axis([0.45, 0.55, plt.axis()[2], plt.axis()[3]])
+    plt.savefig(filename + '-plot4-residual-phase_extract.png')
