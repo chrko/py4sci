@@ -8,27 +8,42 @@ import numpy as np
 import matplotlib
 #matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-plt.ion()
 from copy import deepcopy
+import os
 
 
 sense = 10
 width = 1
 filenames = ['kplr002571238-2009259160929']
+filenames = os.listdir('data')
+filenames.sort()
+filenames = np.array(filenames)
+filenames = np.core.defchararray.replace(filenames, '_llc.txt', '')
 
 
 def median_filter(data, width):
     for position in range(len(data)):
         data[position, 1] = np.mean(
-            data[abs(data[:, 0] - data[position, 0]) < 1, 1]
+            data[abs(data[:, 0] - data[position, 0]) < width/2.0, 1]
         )
 
+
+first = True
 for filename in filenames:
     file = 'data/' + filename + '_llc.txt'
+    dataTemp = np.loadtxt(file)
+    if(first):
+        first = False
+        data = np.array(deepcopy(dataTemp))
+    else:
+        data = np.concatenate([data, dataTemp])
 
-    data = np.loadtxt(file)
-    dataOrig = deepcopy(data)
+#research(data, 'all')
 
+
+def research(dataOrig, filename):
+    data = deepcopy(dataOrig)
+    print 'data.size ', data.size, ' dataOrig.size', dataOrig.size
     median_filter(data, 1)
 
     plt.cla()
@@ -45,6 +60,7 @@ for filename in filenames:
 
     dt = np.diff(data[residualDataY > np.mean(residualDataY) * sense, 0])
     period = np.mean(dt[(dt > 1) & (dt < 15)])
+    print 'dt ', dt, ' period ', period
 
     plt.cla()
     phaseX = ((data[:, 0]) % period) / period
