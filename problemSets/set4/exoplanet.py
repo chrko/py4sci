@@ -6,7 +6,7 @@ looking for exoplanets in kepler data
 
 import numpy as np
 import matplotlib
-#matplotlib.use('Agg')
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from copy import deepcopy
 import os
@@ -14,7 +14,7 @@ import os
 
 sense = 10
 width = 1
-filenames = ['kplr002571238-2009259160929']
+manFileList = ['kplr002571238-2009259160929']
 filenames = os.listdir('data')
 filenames.sort()
 filenames = np.array(filenames)
@@ -22,23 +22,10 @@ filenames = np.core.defchararray.replace(filenames, '_llc.txt', '')
 
 
 def median_filter(data, width):
-    for position in range(len(data)):
+    for position in xrange(len(data)):
         data[position, 1] = np.mean(
             data[abs(data[:, 0] - data[position, 0]) < width/2.0, 1]
         )
-
-
-first = True
-for filename in filenames:
-    file = 'data/' + filename + '_llc.txt'
-    dataTemp = np.loadtxt(file)
-    if(first):
-        first = False
-        data = np.array(deepcopy(dataTemp))
-    else:
-        data = np.concatenate([data, dataTemp])
-
-#research(data, 'all')
 
 
 def research(dataOrig, filename):
@@ -80,3 +67,18 @@ def research(dataOrig, filename):
     plt.axis([0.45, 0.55, plt.axis()[2], plt.axis()[3]])
 
     plt.savefig(filename + '-plot4-residual-phase_extract.png')
+
+data = np.loadtxt('data/' + manFileList[0] + '_llc.txt')
+research(data, manFileList[0])
+
+first = True
+for filename in filenames:
+    file = 'data/' + filename + '_llc.txt'
+    dataTemp = np.loadtxt(file)
+    if(first):
+        first = False
+        data = np.array(deepcopy(dataTemp))
+    else:
+        data = np.concatenate([data, dataTemp])
+
+research(data, 'all')
