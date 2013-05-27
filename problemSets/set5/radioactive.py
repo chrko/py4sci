@@ -3,12 +3,19 @@ radioactive - not by The Imagine Dragons
 
 2013 (c) Christian Kohlsteddde
 """
+import sys
+if len(sys.argv) > 1 and sys.argv[1] == 'true':
+    interactive = True
+else:
+    interactive = False
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')
+if not interactive:
+    matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
-#plt.ion()
+if interactive:
+    plt.ion()
 
 # Loading data from decay_data.txt and split into shorter names
 data = np.loadtxt('decay_data.txt')
