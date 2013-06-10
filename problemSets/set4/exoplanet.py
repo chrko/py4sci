@@ -22,9 +22,10 @@ filenames = np.core.defchararray.replace(filenames, '_llc.txt', '')
 
 
 def median_filter(data, width):
+    dataOrig = deepcopy(data)
     for position in xrange(len(data)):
         data[position, 1] = np.mean(
-            data[abs(data[:, 0] - data[position, 0]) < width/2.0, 1]
+            dataOrig[abs(dataOrig[:, 0] - dataOrig[position, 0]) < width/2.0, 1]
         )
 
 
