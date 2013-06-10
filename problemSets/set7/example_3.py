@@ -17,4 +17,7 @@ n = 1000
 x = np.linspace(0., 10., n)
 y = 3. * x ** 2 + 2. * x + 1.
 
-print "Integral is:", trapz(x, y)
+print "Integral is:", trapz(y, x=x)
+
+# The trapz function is defined another way differs from the original call in this
+# script. So calling it with the right parameters is giving the right result!
